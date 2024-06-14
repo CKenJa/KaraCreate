@@ -1,0 +1,13 @@
+// 1.20.1	2024-06-12T20:01:08.4626477	Registrate Provider for karacreate [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+8cbb3daee495cb00d56422b18a019b2fe60295f1 assets/karacreate/blockstates/paper_door.json
+d37380c3f7d8a187aac60c2276e70466fc8982f3 assets/karacreate/lang/en_ud.json
+a309150466c10870bedbd38eb4dcd083e9582be6 assets/karacreate/lang/en_us.json
+312d7a5be36c6268d1cea4f02f14178741198ede assets/karacreate/models/item/paper_door.json
+5ce692bedf95c7dde937630f71fb95e465524687 data/create/tags/items/contraption_controlled.json
+8fb6633f235b353fc4c6165f2f732a47d0f1e5f5 data/karacreate/loot_tables/blocks/paper_door.json
+5ce692bedf95c7dde937630f71fb95e465524687 data/minecraft/tags/blocks/doors.json
+5ce692bedf95c7dde937630f71fb95e465524687 data/minecraft/tags/blocks/mineable/axe.json
+5ce692bedf95c7dde937630f71fb95e465524687 data/minecraft/tags/blocks/mineable/pickaxe.json
+5ce692bedf95c7dde937630f71fb95e465524687 data/minecraft/tags/blocks/wooden_doors.json
+5ce692bedf95c7dde937630f71fb95e465524687 data/minecraft/tags/items/doors.json
+5ce692bedf95c7dde937630f71fb95e465524687 data/quark/tags/blocks/non_double_door.json

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "PP",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bamboo"
+    },
+    "P": {
+      "tag": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "karacreate:paper_door"
+  }
+}
