@@ -11,16 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 
-/*
-MIT License - see the LICENSE file for full details
-
-Copyright (c) [年] [著作権者名]
-
-https://github.com/Rabbitminers/Extended-Cogwheels
-common/src/main/java/com/rabbitminers/extendedgears/mixin/MixinAllBlockEntityTypes.java
-*/
 @Mixin(AllBlockEntityTypes.class)
-public class AddSlidingDoorBlockMixin {
+public class AllBlockEntityTypesMixin {
     @Redirect(
             method = "<clinit>",
             at = @At(
@@ -33,13 +25,14 @@ public class AddSlidingDoorBlockMixin {
             ),
             remap = false
     )
-    private static <T extends Block, E extends BlockEntity> BlockEntityBuilder<E, ?> addSlidingDoor(
+    private static <T extends Block, E extends BlockEntity> BlockEntityBuilder<E, ?> addSlidingDoorBlock(
             BlockEntityBuilder<E, ?> instance,
             NonNullSupplier<T>[] blocks
     ) {
-
-        instance.validBlocks(KaraCreateBlocks.PAPER_DOOR);
-
+        instance.validBlocks(
+                KaraCreateBlocks.SHOJI,
+                KaraCreateBlocks.FUSUMA
+        );
         return instance.validBlocks(blocks);
     }
 }

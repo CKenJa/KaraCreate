@@ -5,8 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "KaraCreate.refmap.json",
   "mixins": [
-    "AddSlidingDoorBlockMixin",
-    "SlidingDoorSoundMixin"
+    "AllBlockEntityTypesMixin",
+    "SlidingDoorBlockEntityMixin"
   ],
   "client": [
   ],

@@ -16,9 +16,10 @@ public class KaraCreateCreativeModeTabs {
     public static final RegistryObject<CreativeModeTab> MAIN_TAB = REGISTER.register("main", ()-> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.karacreate"))
             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
-            .icon(KaraCreateBlocks.PAPER_DOOR::asStack)
+            .icon(KaraCreateBlocks.SHOJI::asStack)
             .displayItems((params,output)-> output.acceptAll(Stream.of(
-                    KaraCreateBlocks.PAPER_DOOR
+                    KaraCreateBlocks.SHOJI,
+                    KaraCreateBlocks.FUSUMA
             ).map(ItemProviderEntry::asStack).toList()))
             .build());
     public static void register(IEventBus modEventBus) {

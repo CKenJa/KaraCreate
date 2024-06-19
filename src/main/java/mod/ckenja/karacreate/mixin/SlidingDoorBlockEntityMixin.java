@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 
 @Mixin(SlidingDoorBlockEntity.class)
-public abstract class SlidingDoorSoundMixin extends SmartBlockEntity{
-    public SlidingDoorSoundMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+public abstract class SlidingDoorBlockEntityMixin extends SmartBlockEntity{
+    public SlidingDoorBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
