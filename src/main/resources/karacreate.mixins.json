@@ -3,10 +3,13 @@
   "minVersion": "0.8",
   "package": "mod.ckenja.karacreate.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "KaraCreate.refmap.json",
+  "refmap": "karacreate.refmap.json",
   "mixins": [
     "AllBlockEntityTypesMixin",
-    "SlidingDoorBlockEntityMixin"
+    "DoorBlockAccessor",
+    "SlidingDoorBlockEntityAccessor",
+    "SlidingDoorBlockEntityMixin",
+    "SlidingDoorRendererMixin"
   ],
   "client": [
   ],

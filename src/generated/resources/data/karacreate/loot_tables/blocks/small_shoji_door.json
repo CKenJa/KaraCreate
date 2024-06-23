@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "karacreate:small_shoji_door"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "karacreate:blocks/small_shoji_door"
+}

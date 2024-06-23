@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-
 @Mixin(SlidingDoorBlockEntity.class)
 public abstract class SlidingDoorBlockEntityMixin extends SmartBlockEntity{
     public SlidingDoorBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -21,9 +20,10 @@ public abstract class SlidingDoorBlockEntityMixin extends SmartBlockEntity{
 
     @Redirect(method = "showBlockModel()V",
             at = @At(value = "FIELD",
-                    target = "Lnet/minecraft/sounds/SoundEvents;IRON_DOOR_CLOSE:Lnet/minecraft/sounds/SoundEvent;",
+                    target = "Lnet/minecraft/sounds/SoundEvents;IRON_DOOR_CLOSE:Lnet/minecraft/sounds/SoundEvent;"//,
+            ),
             remap = false
-            ))
+    )
     protected SoundEvent getDoorSound() {
         if(getBlockState().getBlock() instanceof DoorBlock door)
             return door.type().doorClose();

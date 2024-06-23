@@ -13,18 +13,18 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "karacreate:paper_door",
+              "block": "karacreate:shoji_door",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "half": "lower"
               }
             }
           ],
-          "name": "karacreate:paper_door"
+          "name": "karacreate:shoji_door"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "karacreate:blocks/paper_door"
+  "random_sequence": "karacreate:blocks/shoji_door"
 }

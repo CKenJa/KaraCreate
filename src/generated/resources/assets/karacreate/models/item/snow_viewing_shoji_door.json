@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "karacreate:item/snow_viewing_shoji_door"
+  }
+}

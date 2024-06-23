@@ -1,4 +1,8 @@
 {
-  "block.karacreate.paper_door": "Paper door",
+  "block.karacreate.fusuma_door": "Fusuma Door",
+  "block.karacreate.shoji_door": "Shoji Door",
+  "block.karacreate.small_fusuma_door": "Small Fusuma Door",
+  "block.karacreate.small_shoji_door": "Small Shoji Door",
+  "block.karacreate.snow_viewing_shoji_door": "Snow Viewing Shoji Door",
   "itemGroup.karacreate": "KaraCreate"
 }

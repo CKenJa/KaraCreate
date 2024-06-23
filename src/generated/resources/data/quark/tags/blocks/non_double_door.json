@@ -1,5 +1,7 @@
 {
   "values": [
-    "karacreate:paper_door"
+    "karacreate:shoji_door",
+    "karacreate:snow_viewing_shoji_door",
+    "karacreate:fusuma_door"
   ]
 }
