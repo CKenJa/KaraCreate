@@ -36,7 +36,7 @@ public class KaraCreateBlocks {
             SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON);
 
     public static final BlockEntry<PaperDoorBlock> SHOJI_DOOR =
-            REGISTRATE.block("shoji_door", p -> new PaperDoorBlock(p, KARACREATE_WOOD, false))
+            REGISTRATE.block("shoji_door", p -> new PaperDoorBlock(p, KARACREATE_WOOD))
                     .transform(woodenSlidingDoor("shoji"))
                     .transform(Japanese.translation("障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
