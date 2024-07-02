@@ -9,7 +9,9 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBehaviour;
+import mod.ckenja.karacreate.content.paperDoor.PaperDoorItemRenderer;
 import mod.ckenja.karacreate.util.LanguageManager;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,6 +30,7 @@ public class KaraCreate {
 
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
     public static LanguageManager Japanese = new LanguageManager(MODID,"ja_jp");
+    public static final BlockEntityWithoutLevelRenderer RENDERER = new PaperDoorItemRenderer();
 
     static {
         REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE));
@@ -42,7 +45,6 @@ public class KaraCreate {
             if (be.getType() == KaraCreateBlockEntityTypes.PAPER_DOOR.get())
                 event.attach(new PaperDoorBehaviour(be));
         });
-
         KaraCreateTags.init();
         KaraCreateBlockEntityTypes.register();
         KaraCreateBlocks.register();

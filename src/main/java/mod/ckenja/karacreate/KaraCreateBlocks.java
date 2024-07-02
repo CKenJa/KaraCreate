@@ -9,6 +9,7 @@ import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBlock;
+import mod.ckenja.karacreate.content.paperDoor.PaperDoorBlockItem;
 import mod.ckenja.karacreate.content.smallDoor.SlidingSmallDoorBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.sounds.SoundEvents;
@@ -40,6 +41,8 @@ public class KaraCreateBlocks {
                     .transform(woodenSlidingDoor("shoji"))
                     .transform(Japanese.translation("障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
+                    .item(PaperDoorBlockItem::new)
+                    .build()
                     .register();
 
     public static final BlockEntry<SlidingDoorBlock> SNOW_VIEWING_SHOJI_DOOR =

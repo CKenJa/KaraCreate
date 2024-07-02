@@ -69,7 +69,7 @@ public class PaperDoorRenderer implements BlockEntityRenderer<SlidingDoorBlockEn
                 .add(Vec3.atLowerCornerOf(facing.getNormal())
                         .scale(value2 * 1 / 32f));
 
-        if (((SlidingDoorBlockEntityAccessor)be).invokeShouldRenderSpecial(blockState))
+        if (((SlidingDoorBlockEntityAccessor)be).invokeShouldRenderSpecial(blockState) || !be.hasLevel())
             for (DoubleBlockHalf half : DoubleBlockHalf.values()) {
                 CachedBufferer.block(blockState.setValue(DoorBlock.OPEN, false).setValue(DoorBlock.HALF, half))
                         .translate(0, half == DoubleBlockHalf.UPPER ? 1 - 1 / 512f : 0, 0)
