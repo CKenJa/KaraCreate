@@ -9,19 +9,22 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBehaviour;
-import mod.ckenja.karacreate.content.paperDoor.PaperDoorItemRenderer;
-import mod.ckenja.karacreate.util.LanguageManager;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import mod.ckenja.karacreate.infrastructure.data.KaraCreateBannerPatternTagsProvider;
+import mod.ckenja.karacreate.infrastructure.lang.LanguageManager;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
-import static mod.ckenja.karacreate.util.LanguageManager.provideDefaultLang;
+import static mod.ckenja.karacreate.infrastructure.lang.LanguageManager.provideDefaultLang;
 
 @Mod(KaraCreate.MODID)
 public class KaraCreate {
@@ -30,7 +33,7 @@ public class KaraCreate {
 
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
     public static LanguageManager Japanese = new LanguageManager(MODID,"ja_jp");
-    public static final BlockEntityWithoutLevelRenderer RENDERER = new PaperDoorItemRenderer();
+    public static final DeferredRegister<BannerPattern> PATTERNS = DeferredRegister.create(Registries.BANNER_PATTERN, KaraCreate.MODID);
 
     static {
         REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE));
@@ -45,14 +48,18 @@ public class KaraCreate {
             if (be.getType() == KaraCreateBlockEntityTypes.PAPER_DOOR.get())
                 event.attach(new PaperDoorBehaviour(be));
         });
+        PATTERNS.register(modEventBus);
         KaraCreateTags.init();
+        KaraCreateBannerPatterns.init();
+        KaraCreateItems.register();
         KaraCreateBlockEntityTypes.register();
         KaraCreateBlocks.register();
         KaraCreateCreativeModeTabs.register(modEventBus);
         modEventBus.addListener(Japanese::initializeProvider);
-        REGISTRATE.addDataGenerator(ProviderType.LANG, (prov)->provideDefaultLang(prov::add, MODID, "en_us"));
+        modEventBus.addListener(EventPriority.LOWEST, KaraCreateBannerPatternTagsProvider::gatherData);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> KaraCreateClient.onConstructor(modEventBus));
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> KaraCreateClient.onConstructor(modEventBus, forgeEventBus));
+        REGISTRATE.addDataGenerator(ProviderType.LANG, (prov) -> provideDefaultLang(prov::add, KaraCreate.MODID, "en_us"));
     }
 
     public static ResourceLocation asResource(String path){

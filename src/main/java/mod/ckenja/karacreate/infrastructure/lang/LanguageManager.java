@@ -1,4 +1,4 @@
-package mod.ckenja.karacreate.util;
+package mod.ckenja.karacreate.infrastructure.lang;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

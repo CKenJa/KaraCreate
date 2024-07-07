@@ -6,7 +6,10 @@ import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBehaviour;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.builders.BlockBuilder;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBlock;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBlockItem;
@@ -15,9 +18,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -38,23 +39,21 @@ public class KaraCreateBlocks {
 
     public static final BlockEntry<PaperDoorBlock> SHOJI_DOOR =
             REGISTRATE.block("shoji_door", p -> new PaperDoorBlock(p, KARACREATE_WOOD))
-                    .transform(woodenSlidingDoor("shoji"))
+                    .transform(woodenSlidingDoor(false))
                     .transform(Japanese.translation("障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
-                    .item(PaperDoorBlockItem::new)
-                    .build()
                     .register();
 
     public static final BlockEntry<SlidingDoorBlock> SNOW_VIEWING_SHOJI_DOOR =
             REGISTRATE.block("snow_viewing_shoji_door", p -> new SlidingDoorBlock(p, KARACREATE_WOOD, false))
-                    .transform(woodenSlidingDoor("snow_viewing_shoji"))
+                    .transform(woodenSlidingDoor(false))
                     .transform(Japanese.translation("雪見障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
                     .register();
 
-    public static final BlockEntry<SlidingDoorBlock> FUSUMA_DOOR =
-            REGISTRATE.block("fusuma_door", p -> new SlidingDoorBlock(p, KARACREATE_WOOD, false))
-                    .transform(woodenSlidingDoor("fusuma"))
+    public static final BlockEntry<PaperDoorBlock> FUSUMA_DOOR =
+            REGISTRATE.block("fusuma_door", p -> new PaperDoorBlock(p, KARACREATE_WOOD))
+                    .transform(woodenSlidingDoor(true))
                     .transform(Japanese.translation("襖"))
                     .properties(p -> p.mapColor(MapColor.WOOL))
                     .register();
@@ -83,7 +82,6 @@ public class KaraCreateBlocks {
 
     public static <B extends SlidingSmallDoorBlock, P>NonNullUnaryOperator<BlockBuilder<B, P>> slidingSmallDoor() {
         return b -> b.blockstate((c, p) -> {
-                    //ModelFile model = p.models().getExistingFile(p.modLoc("block/small_" + type + "_door"));
                     ModelFile model = AssetLookup.standardModel(c, p);
                     p.getVariantBuilder(c.get()).forAllStatesExcept(state -> {
                         int xRot = 0;
@@ -101,16 +99,12 @@ public class KaraCreateBlocks {
                 .build();
     }
 
-    public static <B extends SlidingDoorBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> woodenSlidingDoor(String type) {
+    public static <B extends SlidingDoorBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> woodenSlidingDoor(boolean knob) {
         return b -> b.initialProperties(() -> Blocks.BAMBOO_DOOR)
                 .properties(p -> p.requiresCorrectToolForDrops()
                         .strength(3.0F, 6.0F)
                         .noOcclusion())
-                .blockstate((c, p) -> {
-                    ModelFile bottom = AssetLookup.partialBaseModel(c, p, "bottom");
-                    ModelFile top = AssetLookup.partialBaseModel(c, p, "top");
-                    p.doorBlock(c.get(), bottom, bottom, bottom, bottom, top, top, top, top);
-                })
+                .blockstate(doorBlockProvider(knob))
                 .addLayer(() -> RenderType::cutoutMipped)
                 .transform(axeOnly())
                 .onRegister(interactionBehaviour(new DoorMovingInteraction()))
@@ -119,10 +113,27 @@ public class KaraCreateBlocks {
                 .tag(BlockTags.WOODEN_DOORS) // for villager AI
                 .tag(AllTags.AllBlockTags.NON_DOUBLE_DOOR.tag)
                 .loot((lr, block) -> lr.add(block, lr.createDoorTable(block)))
-                .item()
+                .item(PaperDoorBlockItem::new)
                 .tag(ItemTags.DOORS)
                 .tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
-                .model((c, p) -> p.blockSprite(c, p.modLoc("item/" + type + "_door")))
+                .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("item/template_paper_door")))
                 .build();
+    }
+
+    public static <T extends DoorBlock> NonNullBiConsumer<DataGenContext<Block, T>, RegistrateBlockstateProvider> doorBlockProvider(boolean knob) {
+        if(knob)
+            return (c, p) -> {
+                ModelFile bottom_left = AssetLookup.partialBaseModel(c, p, "bottom_left");
+                ModelFile bottom_right = AssetLookup.partialBaseModel(c, p, "bottom_right");
+                ModelFile top_left = AssetLookup.partialBaseModel(c, p, "top_left");
+                ModelFile top_right = AssetLookup.partialBaseModel(c, p, "top_right");
+                p.doorBlock(c.get(), bottom_left, bottom_left, bottom_right, bottom_right, top_left, top_left, top_right, top_right);
+            };
+        else
+            return (c, p) -> {
+                ModelFile bottom = AssetLookup.partialBaseModel(c, p, "bottom");
+                ModelFile top = AssetLookup.partialBaseModel(c, p, "top");
+                p.doorBlock(c.get(), bottom, bottom, bottom, bottom, top, top, top, top);
+            };
     }
 }

@@ -30,9 +30,7 @@ public class AllBlockEntityTypesMixin {
             NonNullSupplier<T>[] blocks
     ) {
         instance.validBlocks(
-                KaraCreateBlocks.SHOJI_DOOR,
                 KaraCreateBlocks.SNOW_VIEWING_SHOJI_DOOR,
-                KaraCreateBlocks.FUSUMA_DOOR,
                 KaraCreateBlocks.SMALL_SHOJI_DOOR,
                 KaraCreateBlocks.SMALL_FUSUMA_DOOR
         );
