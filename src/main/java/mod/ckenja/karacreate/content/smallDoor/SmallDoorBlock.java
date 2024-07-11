@@ -1,6 +1,6 @@
 package mod.ckenja.karacreate.content.smallDoor;
 
-import mod.ckenja.karacreate.mixin.DoorBlockAccessor;
+import mod.ckenja.karacreate.infrastructure.mixin.DoorBlockAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;

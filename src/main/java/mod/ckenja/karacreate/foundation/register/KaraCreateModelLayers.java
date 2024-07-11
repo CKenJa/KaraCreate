@@ -1,5 +1,6 @@
-package mod.ckenja.karacreate;
+package mod.ckenja.karacreate.foundation.register;
 
+import mod.ckenja.karacreate.KaraCreate;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 
 public class KaraCreateModelLayers {

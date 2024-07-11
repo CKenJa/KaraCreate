@@ -32,7 +32,7 @@ public class BannerPatternLangGenerators {
         );
         Map<String, String> patternTranslations = Map.of("checkered", "市松模様", "hash", "井桁模様");
         String outputFormat = "%sの%s";
-        GenerateTranslations(List.of(colorTranslations,patternTranslations), INPUT_FORMAT,outputFormat,prov::add);
+        generateTranslations(List.of(colorTranslations,patternTranslations), INPUT_FORMAT,outputFormat,prov::add);
     }
 
     public static void en_us(LanguageProvider prov){
@@ -54,21 +54,19 @@ public class BannerPatternLangGenerators {
                 Map.entry("white", "White"),
                 Map.entry("yellow", "Yellow")
         );
-        Map<String, String> patternTranslations = Map.of("checkered", "checkered", "hash", "hash");
+        Map<String, String> patternTranslations = Map.of("checkered", "Checkered", "hash", "Hash");
         String outputFormat = "%s %s";
-        GenerateTranslations(List.of(colorTranslations,patternTranslations), INPUT_FORMAT,outputFormat,prov::add);
+        generateTranslations(List.of(colorTranslations,patternTranslations), INPUT_FORMAT,outputFormat,prov::add);
     }
 
-    public static void GenerateTranslations(List<Map<String, String>> translations,
+    public static void generateTranslations(List<Map<String, String>> translations,
                                             String inputFormat,
                                             String outputFormat,
                                             BiConsumer<String, String> consumer) {
-        List<String> keys = new ArrayList<>();
-        List<String> values = new ArrayList<>();
-        generateTranslationsHelper(translations, keys, values, 0, (k,v)->{
-            String inputKey = String.format(inputFormat, k.toArray());
-            String outputValue = String.format(outputFormat, v.toArray());
-            consumer.accept(inputKey, outputValue);
+        generateTranslationsHelper(translations, new ArrayList<>(), new ArrayList<>(), 0, (k,v)->{
+            String key = String.format(inputFormat, k.toArray());
+            String value = String.format(outputFormat, v.toArray());
+            consumer.accept(key, value);
         });
     }
 

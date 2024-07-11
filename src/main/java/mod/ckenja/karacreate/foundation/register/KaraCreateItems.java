@@ -1,4 +1,4 @@
-package mod.ckenja.karacreate;
+package mod.ckenja.karacreate.foundation.register;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.BannerPatternItem;

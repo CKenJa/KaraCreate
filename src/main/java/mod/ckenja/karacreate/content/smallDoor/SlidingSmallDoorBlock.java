@@ -2,8 +2,8 @@ package mod.ckenja.karacreate.content.smallDoor;
 
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
-import mod.ckenja.karacreate.mixin.DoorBlockAccessor;
-import mod.ckenja.karacreate.mixin.SlidingDoorBlockEntityAccessor;
+import mod.ckenja.karacreate.infrastructure.mixin.DoorBlockAccessor;
+import mod.ckenja.karacreate.infrastructure.mixin.SlidingDoorBlockEntityAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;

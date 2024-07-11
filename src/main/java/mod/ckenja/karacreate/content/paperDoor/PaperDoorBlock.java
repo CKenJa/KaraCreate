@@ -2,7 +2,7 @@ package mod.ckenja.karacreate.content.paperDoor;
 
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
-import mod.ckenja.karacreate.KaraCreateBlockEntityTypes;
+import mod.ckenja.karacreate.foundation.register.KaraCreateBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

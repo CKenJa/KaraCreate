@@ -1,4 +1,4 @@
-package mod.ckenja.karacreate.mixin;
+package mod.ckenja.karacreate.infrastructure.mixin;
 
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;

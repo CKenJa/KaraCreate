@@ -9,12 +9,11 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBehaviour;
+import mod.ckenja.karacreate.foundation.register.*;
 import mod.ckenja.karacreate.infrastructure.data.KaraCreateBannerPatternTagsProvider;
 import mod.ckenja.karacreate.infrastructure.lang.BannerPatternLangGenerators;
 import mod.ckenja.karacreate.infrastructure.lang.LanguageManager;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -22,7 +21,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
 import static mod.ckenja.karacreate.infrastructure.lang.LanguageManager.provideDefaultLang;
@@ -34,7 +32,6 @@ public class KaraCreate {
 
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
     public static LanguageManager Japanese = new LanguageManager(MODID,"ja_jp");
-    public static final DeferredRegister<BannerPattern> PATTERNS = DeferredRegister.create(Registries.BANNER_PATTERN, KaraCreate.MODID);
 
     static {
         REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE));
@@ -49,14 +46,13 @@ public class KaraCreate {
             if (be.getType() == KaraCreateBlockEntityTypes.PAPER_DOOR.get())
                 event.attach(new PaperDoorBehaviour(be));
         });
-        PATTERNS.register(modEventBus);
         KaraCreateTags.init();
-        KaraCreateBannerPatterns.init();
         KaraCreateItems.register();
         KaraCreateBlockEntityTypes.register();
         KaraCreateBlocks.register();
-        KaraCraeteRecipeSerializer.RECIPE_SERIALIZERS.register(modEventBus);
+        KaraCreateBannerPatterns.register(modEventBus);
         KaraCreateCreativeModeTabs.register(modEventBus);
+        KaraCraeteRecipeSerializer.RECIPE_SERIALIZERS.register(modEventBus);
         modEventBus.addListener(Japanese::initializeProvider);
         modEventBus.addListener(EventPriority.LOWEST, KaraCreateBannerPatternTagsProvider::gatherData);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> KaraCreateClient.onConstructor(modEventBus));

@@ -9,7 +9,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import mod.ckenja.karacreate.foundation.render.KaraCreateModelLayers;
-import mod.ckenja.karacreate.mixin.SlidingDoorBlockEntityAccessor;
+import mod.ckenja.karacreate.infrastructure.mixin.SlidingDoorBlockEntityAccessor;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;

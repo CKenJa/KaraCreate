@@ -1,5 +1,6 @@
-package mod.ckenja.karacreate;
+package mod.ckenja.karacreate.foundation.register;
 
+import mod.ckenja.karacreate.KaraCreate;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorDecorationRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;

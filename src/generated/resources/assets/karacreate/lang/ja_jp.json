@@ -36,6 +36,6 @@
   "block.minecraft.banner.karacreate.hash.red": "赤色の井桁模様",
   "block.minecraft.banner.karacreate.hash.white": "白色の井桁模様",
   "block.minecraft.banner.karacreate.hash.yellow": "黄色の井桁模様",
-  "item.karacreate.jaoanese_banner_pattern.desc": "伝統文様",
+  "item.karacreate.japanese_banner_pattern.desc": "伝統文様",
   "itemGroup.karacreate": "KaraCreate"
 }

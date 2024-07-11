@@ -1,6 +1,6 @@
 package mod.ckenja.karacreate.content.paperDoor;
 
-import mod.ckenja.karacreate.KaraCreateTags;
+import mod.ckenja.karacreate.foundation.register.KaraCreateTags;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.NotNull;
 
-import static mod.ckenja.karacreate.KaraCraeteRecipeSerializer.PAPER_DOOR_DECORATION;
+import static mod.ckenja.karacreate.foundation.register.KaraCraeteRecipeSerializer.PAPER_DOOR_DECORATION;
 
 public class PaperDoorDecorationRecipe extends CustomRecipe {
 

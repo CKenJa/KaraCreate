@@ -1,4 +1,4 @@
-package mod.ckenja.karacreate;
+package mod.ckenja.karacreate.foundation.register;
 
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;

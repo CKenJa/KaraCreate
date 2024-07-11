@@ -1,4 +1,4 @@
-package mod.ckenja.karacreate.mixin;
+package mod.ckenja.karacreate.infrastructure.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;

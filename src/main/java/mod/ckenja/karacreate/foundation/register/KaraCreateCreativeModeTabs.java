@@ -1,7 +1,8 @@
-package mod.ckenja.karacreate;
+package mod.ckenja.karacreate.foundation.register;
 
 import com.simibubi.create.AllCreativeModeTabs;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import mod.ckenja.karacreate.KaraCreate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;

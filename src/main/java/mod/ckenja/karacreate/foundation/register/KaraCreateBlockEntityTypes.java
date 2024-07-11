@@ -1,4 +1,4 @@
-package mod.ckenja.karacreate;
+package mod.ckenja.karacreate.foundation.register;
 
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;

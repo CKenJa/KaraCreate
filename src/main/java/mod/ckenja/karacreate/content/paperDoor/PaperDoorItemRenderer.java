@@ -2,7 +2,7 @@ package mod.ckenja.karacreate.content.paperDoor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlockEntity;
-import mod.ckenja.karacreate.KaraCreateBlockEntityTypes;
+import mod.ckenja.karacreate.foundation.register.KaraCreateBlockEntityTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;

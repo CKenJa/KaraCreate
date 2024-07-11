@@ -1,6 +1,7 @@
-package mod.ckenja.karacreate;
+package mod.ckenja.karacreate.foundation.register;
 
 import com.simibubi.create.foundation.utility.Lang;
+import mod.ckenja.karacreate.KaraCreate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
