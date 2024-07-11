@@ -1,11 +1,11 @@
-// 1.20.1	2024-07-07T20:40:23.3768139	Registrate Provider for karacreate [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-07-11T15:21:13.9729345	Registrate Provider for karacreate [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 09b243478db304973b9c3614787346ad56568062 assets/karacreate/blockstates/fusuma_door.json
 a148f24c4c323baba8ce5a6a79d230fef022850d assets/karacreate/blockstates/shoji_door.json
 6a2fdb58dd6011ebd7a27f9129f2063853e4b245 assets/karacreate/blockstates/small_fusuma_door.json
 08971d2fbc7a46f5c32e177ab37510afea20aa31 assets/karacreate/blockstates/small_shoji_door.json
 73d3c612a585f902089cac02f156a0169e244e5c assets/karacreate/blockstates/snow_viewing_shoji_door.json
-2aed3ea12f845dabba08e9debe8591b4b3faeaab assets/karacreate/lang/en_ud.json
-b3efe8790e614131fdf605079c57bd80a2459739 assets/karacreate/lang/en_us.json
+5b5db1b4fe1038184c1cdffb2431f658d49a1793 assets/karacreate/lang/en_ud.json
+a7b12864f5de4471a31397ba1299557da819bfa1 assets/karacreate/lang/en_us.json
 f3ceba3c4177b3e5ed60b4f9f9f3bec29c767b53 assets/karacreate/models/item/fusuma_door.json
 730c57b84e258d82db385dff957e860ad86d09ae assets/karacreate/models/item/japanese_banner_pattern.json
 f3ceba3c4177b3e5ed60b4f9f9f3bec29c767b53 assets/karacreate/models/item/shoji_door.json
@@ -18,7 +18,9 @@ f3ceba3c4177b3e5ed60b4f9f9f3bec29c767b53 assets/karacreate/models/item/snow_view
 868b210266d10002d9739d08ac301f2485273b36 data/karacreate/loot_tables/blocks/small_fusuma_door.json
 8990400131566191b49c193ede61edf4acde3adc data/karacreate/loot_tables/blocks/small_shoji_door.json
 23a14fbe9775c7e978e370ed3248cc263cddb3b1 data/karacreate/loot_tables/blocks/snow_viewing_shoji_door.json
+dd8b1280a765da68a21546c364da1d0ea881c7c8 data/karacreate/tags/blocks/paper_door.json
 bc3048529a84a058a723f039199cf537a5709d5e data/karacreate/tags/blocks/small_door.json
+dd8b1280a765da68a21546c364da1d0ea881c7c8 data/karacreate/tags/items/paper_door.json
 bc3048529a84a058a723f039199cf537a5709d5e data/karacreate/tags/items/small_door.json
 645c56f80ababb92967c75d9588a4b3845da7ed7 data/minecraft/tags/blocks/doors.json
 acb975f0911322b297cd4aca29cf813eac79e0f5 data/minecraft/tags/blocks/mineable/axe.json

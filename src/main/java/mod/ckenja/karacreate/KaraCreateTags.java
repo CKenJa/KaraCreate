@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 
 public class KaraCreateTags {
     public enum BlockTags {
-        SMALL_DOOR;
+        SMALL_DOOR, PAPER_DOOR;
         public final TagKey<Block> tag;
 
         BlockTags() {
@@ -21,7 +21,7 @@ public class KaraCreateTags {
     }
 
     public enum ItemTags {
-        SMALL_DOOR;
+        SMALL_DOOR, PAPER_DOOR;
         public final TagKey<Item> tag;
 
         ItemTags() {

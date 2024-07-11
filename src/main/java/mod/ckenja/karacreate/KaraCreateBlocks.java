@@ -40,6 +40,7 @@ public class KaraCreateBlocks {
     public static final BlockEntry<PaperDoorBlock> SHOJI_DOOR =
             REGISTRATE.block("shoji_door", p -> new PaperDoorBlock(p, KARACREATE_WOOD))
                     .transform(woodenSlidingDoor(false))
+                    .transform(paperDoorItem())
                     .transform(Japanese.translation("障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
                     .register();
@@ -47,6 +48,11 @@ public class KaraCreateBlocks {
     public static final BlockEntry<SlidingDoorBlock> SNOW_VIEWING_SHOJI_DOOR =
             REGISTRATE.block("snow_viewing_shoji_door", p -> new SlidingDoorBlock(p, KARACREATE_WOOD, false))
                     .transform(woodenSlidingDoor(false))
+                    .item(PaperDoorBlockItem::new)
+                    .tag(ItemTags.DOORS)
+                    .tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
+                    .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("item/template_paper_door")))
+                    .build()
                     .transform(Japanese.translation("雪見障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
                     .register();
@@ -54,15 +60,16 @@ public class KaraCreateBlocks {
     public static final BlockEntry<PaperDoorBlock> FUSUMA_DOOR =
             REGISTRATE.block("fusuma_door", p -> new PaperDoorBlock(p, KARACREATE_WOOD))
                     .transform(woodenSlidingDoor(true))
+                    .transform(paperDoorItem())
                     .transform(Japanese.translation("襖"))
-                    .properties(p -> p.mapColor(MapColor.WOOL))
+                    .properties(p -> p.mapColor(MapColor.COLOR_BLACK))
                     .register();
 
     public static final BlockEntry<SlidingSmallDoorBlock> SMALL_SHOJI_DOOR =
             REGISTRATE.block("small_shoji_door", p -> new SlidingSmallDoorBlock(p, KARACREATE_WOOD,false))
                     .transform(slidingSmallDoor())
                     .initialProperties(() -> Blocks.BAMBOO_DOOR)
-                    .properties(p -> p.mapColor(MapColor.WOOL))
+                    .properties(p -> p.mapColor(MapColor.WOOD))
                     .transform(Japanese.translation("欄間障子"))
                     .transform(axeOnly())
                     .register();
@@ -71,7 +78,7 @@ public class KaraCreateBlocks {
             REGISTRATE.block("small_fusuma_door", p -> new SlidingSmallDoorBlock(p, KARACREATE_WOOD,false))
                     .transform(slidingSmallDoor())
                     .initialProperties(() -> Blocks.BAMBOO_DOOR)
-                    .properties(p -> p.mapColor(MapColor.WOOL))
+                    .properties(p -> p.mapColor(MapColor.COLOR_BLACK))
                     .transform(Japanese.translation("半襖"))
                     .transform(axeOnly())
                     .register();
@@ -112,10 +119,16 @@ public class KaraCreateBlocks {
                 .tag(BlockTags.DOORS)
                 .tag(BlockTags.WOODEN_DOORS) // for villager AI
                 .tag(AllTags.AllBlockTags.NON_DOUBLE_DOOR.tag)
-                .loot((lr, block) -> lr.add(block, lr.createDoorTable(block)))
+                .loot((lr, block) -> lr.add(block, lr.createDoorTable(block)));
+    }
+
+
+    public static <B extends SlidingDoorBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> paperDoorItem() {
+        return b -> b.tag(KaraCreateTags.BlockTags.PAPER_DOOR.tag)
                 .item(PaperDoorBlockItem::new)
                 .tag(ItemTags.DOORS)
                 .tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
+                .tag(KaraCreateTags.ItemTags.PAPER_DOOR.tag)
                 .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("item/template_paper_door")))
                 .build();
     }

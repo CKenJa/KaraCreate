@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static net.minecraft.world.item.ShieldItem.getColor;
 import static net.minecraft.world.level.block.entity.BannerBlockEntity.createPatterns;
 
 public class PaperDoorBehaviour extends BlockEntityBehaviour {
@@ -25,6 +26,7 @@ public class PaperDoorBehaviour extends BlockEntityBehaviour {
     private ListTag itemPatterns;
     @Nullable
     private List<Pair<Holder<BannerPattern>, DyeColor>> patterns;
+    private DyeColor color;
 
     public PaperDoorBehaviour(SmartBlockEntity be) {
         super(be);
@@ -37,12 +39,13 @@ public class PaperDoorBehaviour extends BlockEntityBehaviour {
 
     public void fromItem(ItemStack pItem) {
         this.itemPatterns = BannerBlockEntity.getItemPatterns(pItem);
+        this.color = getColor(pItem);
         this.patterns = null;
     }
 
     public List<Pair<Holder<BannerPattern>, DyeColor>> getPatterns() {
         if(patterns == null)
-            patterns = createPatterns(DyeColor.WHITE, this.itemPatterns);
+            patterns = createPatterns(color != null ? color : DyeColor.WHITE , this.itemPatterns);
         return patterns;
     }
 
@@ -51,12 +54,15 @@ public class PaperDoorBehaviour extends BlockEntityBehaviour {
         super.write(nbt, clientPacket);
         if(itemPatterns != null)
             nbt.put("Patterns", itemPatterns);
+        if(color != null)
+            nbt.putInt("Base", color.getId());
     }
 
     @Override
     public void read(CompoundTag nbt, boolean clientPacket) {
         super.read(nbt, clientPacket);
         itemPatterns = nbt.getList("Patterns",Tag.TAG_COMPOUND);
+        color = DyeColor.byId(nbt.getInt("Base"));
         patterns = null;
     }
 }

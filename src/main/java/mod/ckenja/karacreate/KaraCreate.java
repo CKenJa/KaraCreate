@@ -10,6 +10,7 @@ import com.simibubi.create.foundation.item.TooltipHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBehaviour;
 import mod.ckenja.karacreate.infrastructure.data.KaraCreateBannerPatternTagsProvider;
+import mod.ckenja.karacreate.infrastructure.lang.BannerPatternLangGenerators;
 import mod.ckenja.karacreate.infrastructure.lang.LanguageManager;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -54,12 +55,15 @@ public class KaraCreate {
         KaraCreateItems.register();
         KaraCreateBlockEntityTypes.register();
         KaraCreateBlocks.register();
+        KaraCraeteRecipeSerializer.RECIPE_SERIALIZERS.register(modEventBus);
         KaraCreateCreativeModeTabs.register(modEventBus);
         modEventBus.addListener(Japanese::initializeProvider);
         modEventBus.addListener(EventPriority.LOWEST, KaraCreateBannerPatternTagsProvider::gatherData);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> KaraCreateClient.onConstructor(modEventBus));
 
         REGISTRATE.addDataGenerator(ProviderType.LANG, (prov) -> provideDefaultLang(prov::add, KaraCreate.MODID, "en_us"));
+        REGISTRATE.addDataGenerator(ProviderType.LANG, BannerPatternLangGenerators::en_us);
+        Japanese.addGenerator(BannerPatternLangGenerators::ja_jp);
     }
 
     public static ResourceLocation asResource(String path){
