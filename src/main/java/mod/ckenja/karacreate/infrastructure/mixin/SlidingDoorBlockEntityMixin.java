@@ -20,11 +20,10 @@ public abstract class SlidingDoorBlockEntityMixin extends SmartBlockEntity{
 
     @Redirect(method = "showBlockModel()V",
             at = @At(value = "FIELD",
-                    target = "Lnet/minecraft/sounds/SoundEvents;IRON_DOOR_CLOSE:Lnet/minecraft/sounds/SoundEvent;"//,
-            ),
-            remap = false
+                    target = "Lnet/minecraft/sounds/SoundEvents;IRON_DOOR_CLOSE:Lnet/minecraft/sounds/SoundEvent;"
+            )
     )
-    protected SoundEvent getDoorSound() {
+   protected SoundEvent getDoorSound() {
         if(getBlockState().getBlock() instanceof DoorBlock door)
             return door.type().doorClose();
         return SoundEvents.IRON_DOOR_CLOSE;

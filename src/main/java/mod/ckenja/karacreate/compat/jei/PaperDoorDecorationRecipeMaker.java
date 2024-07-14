@@ -1,9 +1,5 @@
-package mod.ckenja.karacreate.compat;
+package mod.ckenja.karacreate.compat.jei;
 
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
-import mezz.jei.api.registration.IRecipeRegistration;
 import mod.ckenja.karacreate.KaraCreate;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBlockItem;
 import mod.ckenja.karacreate.foundation.register.KaraCreateTags;
@@ -26,20 +22,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.StreamSupport;
 
-@JeiPlugin
-@SuppressWarnings("unused")
-public class KaraCreateJEI implements IModPlugin {
-    @Override
-    public ResourceLocation getPluginUid() {
-        return KaraCreate.asResource("jei_plugin");
-    }
+public class PaperDoorDecorationRecipeMaker {
 
-    @Override
-    public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(RecipeTypes.CRAFTING, KaraCreateJEI.createPaperDoorDecorationRecipe());
-    }
-
-    public static List<CraftingRecipe> createPaperDoorDecorationRecipe() {
+    public static List<CraftingRecipe> createRecipes() {
         Iterable<Holder<Item>> banners = BuiltInRegistries.ITEM.getTagOrEmpty(ItemTags.BANNERS);
 
         Set<DyeColor> colors = EnumSet.noneOf(DyeColor.class);
@@ -58,26 +43,27 @@ public class KaraCreateJEI implements IModPlugin {
                         .map(door -> createRecipe(banner, (PaperDoorBlockItem) door))
                 )
                 .toList();
-        }
+    }
 
-        private static CraftingRecipe createRecipe(BannerItem banner, PaperDoorBlockItem door) {
-            NonNullList<Ingredient> inputs = NonNullList.of(
-                    Ingredient.EMPTY,
-                    Ingredient.of(banner),
-                    Ingredient.of(door)
-            );
+    private static CraftingRecipe createRecipe(BannerItem banner, PaperDoorBlockItem door) {
+        NonNullList<Ingredient> inputs = NonNullList.of(
+                Ingredient.EMPTY,
+                Ingredient.of(banner),
+                Ingredient.of(door)
+        );
 
-            ItemStack output = createOutput(banner, door);
+        ItemStack output = createOutput(banner, door);
 
-            ResourceLocation id = KaraCreate.asResource("karacreate.paper_door.decoration." + output.getDescriptionId());
-            return new ShapelessRecipe(id, "karacreate.paper_door.decoration", CraftingBookCategory.MISC, output, inputs);
-        }
+        ResourceLocation id = KaraCreate.asResource("karacreate.paper_door.decoration." + output.getDescriptionId());
+        return new ShapelessRecipe(id, "karacreate.paper_door.decoration", CraftingBookCategory.MISC, output, inputs);
+    }
 
-        private static ItemStack createOutput(BannerItem banner, PaperDoorBlockItem door) {
-            DyeColor color = banner.getColor();
-            ItemStack output = new ItemStack(door);
-            CompoundTag tag = new CompoundTag();
-            tag.putInt("Base", color.getId());
-            BlockItem.setBlockEntityData(output, BlockEntityType.BANNER, tag);
-            return output;
-        }}
+    private static ItemStack createOutput(BannerItem banner, PaperDoorBlockItem door) {
+        DyeColor color = banner.getColor();
+        ItemStack output = new ItemStack(door);
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("Base", color.getId());
+        BlockItem.setBlockEntityData(output, BlockEntityType.BANNER, tag);
+        return output;
+    }
+}

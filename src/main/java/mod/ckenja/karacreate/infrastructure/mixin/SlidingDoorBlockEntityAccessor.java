@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(value = SlidingDoorBlockEntity.class,remap = false)
+@Mixin(SlidingDoorBlockEntity.class)
 public interface SlidingDoorBlockEntityAccessor {
 
     @Accessor("animation")

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "karacreate:block/mechanical_composter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "karacreate:block/mechanical_composter"
+    },
+    "facing=south": {
+      "model": "karacreate:block/mechanical_composter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "karacreate:block/mechanical_composter",
+      "y": 270
+    }
+  }
+}

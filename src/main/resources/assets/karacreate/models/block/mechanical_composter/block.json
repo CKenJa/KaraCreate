@@ -1,0 +1,47 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"5": "karacreate:block/mechanical_composter",
+		"particle": "karacreate:block/mechanical_composter"
+	},
+	"elements": [
+		{
+			"name": "metal",
+			"from": [0, 0, 0.45],
+			"to": [16, 12, 0.55],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [8, 7, 16, 13], "texture": "#5"},
+				"east": {"uv": [16, 15.5, 15.5, 16], "texture": "#5"},
+				"south": {"uv": [8, 7, 16, 13], "texture": "#5"},
+				"west": {"uv": [16, 15.5, 15.5, 16], "texture": "#5"},
+				"up": {"uv": [16, 15.5, 15.5, 16], "texture": "#5"},
+				"down": {"uv": [16, 15.5, 15.5, 16], "texture": "#5"}
+			}
+		},
+		{
+			"name": "metal",
+			"from": [0, 0, 15.45],
+			"to": [16, 12, 15.55],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [8, 7, 16, 13], "texture": "#5"},
+				"east": {"uv": [16, 15.5, 15.5, 16], "texture": "#5"},
+				"south": {"uv": [8, 7, 16, 13], "texture": "#5"},
+				"west": {"uv": [16, 15.5, 15.5, 16], "texture": "#5"},
+				"up": {"uv": [16, 15.5, 15.5, 16], "texture": "#5"},
+				"down": {"uv": [16, 15.5, 15.5, 16], "texture": "#5"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "block",
+			"origin": [13.2, 1, 1.5],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

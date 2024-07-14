@@ -10,7 +10,8 @@
     "DoorBlockAccessor",
     "SlidingDoorBlockEntityAccessor",
     "SlidingDoorBlockEntityMixin",
-    "SlidingDoorRendererMixin"
+    "SlidingDoorRendererMixin",
+    "RecipeManagerAccessor"
   ],
   "client": [
   ],

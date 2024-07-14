@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.DoorBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(value = DoorBlock.class,remap = false)
+@Mixin(DoorBlock.class)
 public interface DoorBlockAccessor {
     @Invoker("playSound")
     void invokePlaySound(Entity entity, Level level, BlockPos blockPos, boolean bl);

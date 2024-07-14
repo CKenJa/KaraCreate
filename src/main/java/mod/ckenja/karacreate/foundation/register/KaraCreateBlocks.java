@@ -4,13 +4,17 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBehaviour;
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.AssetLookup;
+import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
+import mod.ckenja.karacreate.content.composter.MechanicalComposterBlock;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBlock;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBlockItem;
 import mod.ckenja.karacreate.content.smallDoor.SlidingSmallDoorBlock;
@@ -26,7 +30,9 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 import static com.simibubi.create.AllInteractionBehaviours.interactionBehaviour;
 import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
+import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOnly;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static mod.ckenja.karacreate.KaraCreate.REGISTRATE;
 import static mod.ckenja.karacreate.KaraCreate.Japanese;
 
@@ -81,6 +87,18 @@ public class KaraCreateBlocks {
                     .properties(p -> p.mapColor(MapColor.COLOR_BLACK))
                     .transform(Japanese.translation("半襖"))
                     .transform(axeOnly())
+                    .register();
+
+    public static final BlockEntry<MechanicalComposterBlock> COMPOSTER =
+            REGISTRATE.block("mechanical_composter",MechanicalComposterBlock::new)
+    		        .initialProperties(SharedProperties::stone)
+		            .properties(p -> p.mapColor(MapColor.METAL))
+                    .transform(pickaxeOnly())
+                    .blockstate(BlockStateGen.horizontalBlockProvider(false))
+                    .transform(BlockStressDefaults.setImpact(4.0))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .item()
+                    .transform(customItemModel())
                     .register();
 
     public static void register() {

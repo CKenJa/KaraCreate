@@ -47,9 +47,11 @@ public class KaraCreate {
                 event.attach(new PaperDoorBehaviour(be));
         });
         KaraCreateTags.init();
+        KaraCreatePartialModels.init();
         KaraCreateItems.register();
         KaraCreateBlockEntityTypes.register();
         KaraCreateBlocks.register();
+        KaraCreateRecipeTypes.register(modEventBus);
         KaraCreateBannerPatterns.register(modEventBus);
         KaraCreateCreativeModeTabs.register(modEventBus);
         KaraCraeteRecipeSerializer.RECIPE_SERIALIZERS.register(modEventBus);
