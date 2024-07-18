@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Lang;
 import mod.ckenja.karacreate.KaraCreate;
 import mod.ckenja.karacreate.content.composter.CompostingRecipe;
+import mod.ckenja.karacreate.content.composter.CompostingRecipeSerializer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -24,7 +25,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum KaraCreateRecipeTypes implements IRecipeTypeInfo {
-    COMPOSTING(CompostingRecipe::new)
+    COMPOSTING(CompostingRecipeSerializer::new)
     ;
 
     private final ResourceLocation id;
@@ -68,10 +69,10 @@ public enum KaraCreateRecipeTypes implements IRecipeTypeInfo {
         return (T) type.get();
     }
 
-    public <C extends Container, T extends Recipe<C>> Optional<T> find(C inv, Level world) {
+    /*public <C extends Container, T extends Recipe<C>> Optional<T> find(C inv, Level world) {
         return world.getRecipeManager()
                 .getRecipeFor(getType(), inv, world);
-    }
+    }*/
 
     private static class Registers {
         private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, KaraCreate.MODID);

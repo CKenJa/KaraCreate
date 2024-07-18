@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "PP",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "karacreate:fusuma_door"
+  }
+}

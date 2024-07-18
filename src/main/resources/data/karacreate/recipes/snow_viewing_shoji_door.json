@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "PP",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bamboo"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "karacreate:snow_viewing_shoji_door"
+  }
+}

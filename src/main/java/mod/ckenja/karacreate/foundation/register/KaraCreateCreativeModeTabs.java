@@ -24,7 +24,8 @@ public class KaraCreateCreativeModeTabs {
                     KaraCreateBlocks.SNOW_VIEWING_SHOJI_DOOR,
                     KaraCreateBlocks.FUSUMA_DOOR,
                     KaraCreateBlocks.SMALL_FUSUMA_DOOR,
-                    KaraCreateItems.PATTERN
+                    KaraCreateItems.PATTERN,
+                    KaraCreateBlocks.COMPOSTER
             ).map(ItemProviderEntry::asStack).toList()))
             .build());
     public static void register(IEventBus modEventBus) {

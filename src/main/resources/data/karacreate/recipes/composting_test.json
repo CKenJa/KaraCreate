@@ -1,23 +1,11 @@
 {
   "type": "karacreate:composting",
-  "ingredients": [
-    {
-      "item": "minecraft:bone"
-    }
-  ],
+  "minSpeed": 0.0,
+  "maxSpeed": 128.0,
   "results": [
     {
       "item": "minecraft:bone_meal",
-      "count": 3
-    },
-    {
-      "item": "minecraft:bone_meal",
-      "chance": 0.25
-    },
-    {
-      "item": "minecraft:bone_meal",
-      "count": 3,
-      "chance": 0.25
+      "count": 2
     }
   ],
   "processingTime": 100

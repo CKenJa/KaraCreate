@@ -18,6 +18,7 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mod.ckenja.karacreate.KaraCreate;
+import mod.ckenja.karacreate.content.composter.CompostingRecipe;
 import mod.ckenja.karacreate.foundation.register.KaraCreateBlocks;
 import mod.ckenja.karacreate.foundation.register.KaraCreateRecipeTypes;
 import mod.ckenja.karacreate.infrastructure.mixin.RecipeManagerAccessor;
@@ -37,7 +38,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 @JeiPlugin
 public class KaraCreateJEI implements IModPlugin {
-    private CreateRecipeCategory<AbstractCrushingRecipe> composting;
+    private CreateRecipeCategory<CompostingRecipe> composting;
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -47,10 +48,10 @@ public class KaraCreateJEI implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(composting =
-                new CategoryBuilder<>(AbstractCrushingRecipe.class)
+                new CategoryBuilder<>(CompostingRecipe.class)
                         .addTypedRecipes(KaraCreateRecipeTypes.COMPOSTING)
                         .catalyst(KaraCreateBlocks.COMPOSTER::get)
-                        .itemIcon(KaraCreateBlocks.COMPOSTER)
+                        .itemIcon(KaraCreateBlocks.COMPOSTER.get())
                         .emptyBackground(177, 53)
                         .build("composting", CompostingCategory::new)
         );

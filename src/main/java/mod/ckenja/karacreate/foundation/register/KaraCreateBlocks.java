@@ -7,12 +7,14 @@ import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBeh
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mod.ckenja.karacreate.content.composter.MechanicalComposterBlock;
 import mod.ckenja.karacreate.content.paperDoor.PaperDoorBlock;
@@ -24,6 +26,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -47,7 +50,7 @@ public class KaraCreateBlocks {
             REGISTRATE.block("shoji_door", p -> new PaperDoorBlock(p, KARACREATE_WOOD))
                     .transform(woodenSlidingDoor(false))
                     .transform(paperDoorItem())
-                    .transform(Japanese.translation("障子"))
+                    .onRegister(Japanese.block("障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
                     .register();
 
@@ -59,7 +62,7 @@ public class KaraCreateBlocks {
                     .tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
                     .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("item/template_paper_door")))
                     .build()
-                    .transform(Japanese.translation("雪見障子"))
+                    .onRegister(Japanese.block("雪見障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
                     .register();
 
@@ -67,34 +70,32 @@ public class KaraCreateBlocks {
             REGISTRATE.block("fusuma_door", p -> new PaperDoorBlock(p, KARACREATE_WOOD))
                     .transform(woodenSlidingDoor(true))
                     .transform(paperDoorItem())
-                    .transform(Japanese.translation("襖"))
+                    .onRegister(Japanese.block("襖"))
                     .properties(p -> p.mapColor(MapColor.COLOR_BLACK))
                     .register();
 
     public static final BlockEntry<SlidingSmallDoorBlock> SMALL_SHOJI_DOOR =
             REGISTRATE.block("small_shoji_door", p -> new SlidingSmallDoorBlock(p, KARACREATE_WOOD,false))
-                    .transform(slidingSmallDoor())
-                    .initialProperties(() -> Blocks.BAMBOO_DOOR)
+                    .transform(smallDoor(false))
+                    .onRegister(Japanese.block("欄間障子"))
                     .properties(p -> p.mapColor(MapColor.WOOD))
-                    .transform(Japanese.translation("欄間障子"))
-                    .transform(axeOnly())
                     .register();
 
     public static final BlockEntry<SlidingSmallDoorBlock> SMALL_FUSUMA_DOOR =
             REGISTRATE.block("small_fusuma_door", p -> new SlidingSmallDoorBlock(p, KARACREATE_WOOD,false))
-                    .transform(slidingSmallDoor())
-                    .initialProperties(() -> Blocks.BAMBOO_DOOR)
+                    .transform(smallDoor(true))
+                    .onRegister(Japanese.block("半襖"))
                     .properties(p -> p.mapColor(MapColor.COLOR_BLACK))
-                    .transform(Japanese.translation("半襖"))
                     .transform(axeOnly())
                     .register();
 
     public static final BlockEntry<MechanicalComposterBlock> COMPOSTER =
             REGISTRATE.block("mechanical_composter",MechanicalComposterBlock::new)
     		        .initialProperties(SharedProperties::stone)
-		            .properties(p -> p.mapColor(MapColor.METAL))
+		            .properties(p -> p.mapColor(MapColor.METAL).noOcclusion())
                     .transform(pickaxeOnly())
-                    .blockstate(BlockStateGen.horizontalBlockProvider(false))
+                    .onRegister(Japanese.block("メカニカルコンポスター"))
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
                     .transform(BlockStressDefaults.setImpact(4.0))
                     .addLayer(() -> RenderType::cutoutMipped)
                     .item()
@@ -103,25 +104,6 @@ public class KaraCreateBlocks {
 
     public static void register() {
         REGISTRATE.setCreativeTab(KaraCreateCreativeModeTabs.MAIN_TAB);
-    }
-
-    public static <B extends SlidingSmallDoorBlock, P>NonNullUnaryOperator<BlockBuilder<B, P>> slidingSmallDoor() {
-        return b -> b.blockstate((c, p) -> {
-                    ModelFile model = AssetLookup.standardModel(c, p);
-                    p.getVariantBuilder(c.get()).forAllStatesExcept(state -> {
-                        int xRot = 0;
-                        int yRot = ((int) state.getValue(TrapDoorBlock.FACING).toYRot()) + 180;
-                        yRot %= 360;
-                        return ConfiguredModel.builder().modelFile(model)
-                                .rotationX(xRot)
-                                .rotationY(yRot)
-                                .build();
-                    }, TrapDoorBlock.POWERED, TrapDoorBlock.WATERLOGGED);
-                })
-                .tag(KaraCreateTags.BlockTags.SMALL_DOOR.tag)
-                .item()
-                .tag(KaraCreateTags.ItemTags.SMALL_DOOR.tag)
-                .build();
     }
 
     public static <B extends SlidingDoorBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> woodenSlidingDoor(boolean knob) {
@@ -140,6 +122,39 @@ public class KaraCreateBlocks {
                 .loot((lr, block) -> lr.add(block, lr.createDoorTable(block)));
     }
 
+    private static <B extends SlidingDoorBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> smallDoor(boolean knob) {
+        return b -> b.tag(KaraCreateTags.BlockTags.SMALL_DOOR.tag)
+            .item()
+            .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("block/"+c.getName()+"/block_right")))
+            .tag(KaraCreateTags.ItemTags.SMALL_DOOR.tag)
+            .build()
+            .initialProperties(() -> Blocks.BAMBOO_DOOR)
+            .blockstate((c, p) -> {
+            p.getVariantBuilder(c.get()).forAllStatesExcept(state -> {
+                if(knob) {
+                    ModelFile rightModel = AssetLookup.partialBaseModel(c, p, "right");
+                    ModelFile leftModel = AssetLookup.partialBaseModel(c, p, "left");
+                    boolean right = state.getValue(DoorBlock.HINGE) == DoorHingeSide.RIGHT;
+                    int xRot = 0;
+                    int yRot = ((int) state.getValue(TrapDoorBlock.FACING).toYRot()) + 180;
+                    yRot %= 360;
+                    return ConfiguredModel.builder().modelFile(right ? rightModel : leftModel)
+                            .rotationX(xRot)
+                            .rotationY(yRot)
+                            .build();
+                } else {
+                    ModelFile model = AssetLookup.standardModel(c, p);
+                    int xRot = 0;
+                    int yRot = ((int) state.getValue(TrapDoorBlock.FACING).toYRot()) + 180;
+                    yRot %= 360;
+                    return ConfiguredModel.builder().modelFile(model)
+                            .rotationX(xRot)
+                            .rotationY(yRot)
+                            .build();
+                }
+            }, TrapDoorBlock.POWERED, TrapDoorBlock.WATERLOGGED);
+        });
+    }
 
     public static <B extends SlidingDoorBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> paperDoorItem() {
         return b -> b.tag(KaraCreateTags.BlockTags.PAPER_DOOR.tag)

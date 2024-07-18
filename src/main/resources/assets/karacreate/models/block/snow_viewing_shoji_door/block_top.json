@@ -4,7 +4,7 @@
   "textures": {
     "0": "karacreate:block/snow_viewing_shoji_door_side",
     "2": "karacreate:block/snow_viewing_shoji_door_top",
-    "particle": "minecraft:block/oak_planks"
+    "particle": "karacreate:block/snow_viewing_shoji_door_side"
   },
   "elements": [
     {

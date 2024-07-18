@@ -4,9 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.builders.BlockBuilder;
+import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -57,10 +59,15 @@ public class LanguageManager {
         gen.addProvider(event.includeClient(), prov);
     }
 
-    public <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> translation(String name) {
-        return builder -> {
-            addGenerator(prov-> prov.add(builder.getOwner().get(builder.getName(), builder.getRegistryKey()).get().getDescriptionId(),name));
-            return builder;
+    public <B extends Block> NonNullConsumer<? super B> block(String name) {
+        return block -> {
+            addGenerator(prov-> prov.add(block.getDescriptionId(),name));
+        };
+    }
+
+    public <I extends Item> NonNullConsumer<? super I> item(String name) {
+        return item -> {
+            addGenerator(prov-> prov.add(item.getDescriptionId(),name));
         };
     }
 }

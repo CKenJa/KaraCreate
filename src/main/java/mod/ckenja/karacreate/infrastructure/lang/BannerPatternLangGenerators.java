@@ -30,7 +30,13 @@ public class BannerPatternLangGenerators {
                 Map.entry("white", "白色"),
                 Map.entry("yellow", "黄色")
         );
-        Map<String, String> patternTranslations = Map.of("checkered", "市松模様", "hash", "井桁模様");
+        Map<String, String> patternTranslations = Map.of(
+                "checkered", "市松",
+                "hash", "井桁",
+                "hash4", "小さな市松",
+                "circle", "まる",
+                "mountain", "風景画"
+        );
         String outputFormat = "%sの%s";
         generateTranslations(List.of(colorTranslations,patternTranslations), INPUT_FORMAT,outputFormat,prov::add);
     }
@@ -54,7 +60,13 @@ public class BannerPatternLangGenerators {
                 Map.entry("white", "White"),
                 Map.entry("yellow", "Yellow")
         );
-        Map<String, String> patternTranslations = Map.of("checkered", "Checkered", "hash", "Hash");
+        Map<String, String> patternTranslations = Map.of(
+                "checkered", "Checkered",
+                "hash", "Hash",
+                "hash4", "Small Hash",
+                "circle", "Circle",
+                "mountain", "Zen"
+        );
         String outputFormat = "%s %s";
         generateTranslations(List.of(colorTranslations,patternTranslations), INPUT_FORMAT,outputFormat,prov::add);
     }

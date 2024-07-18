@@ -8,6 +8,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.Locale;
+
 public class KaraCreateBannerPatterns {
     public static final DeferredRegister<BannerPattern> PATTERNS = DeferredRegister.create(Registries.BANNER_PATTERN, KaraCreate.MODID);
 
@@ -17,17 +19,27 @@ public class KaraCreateBannerPatterns {
     }
 
     public enum Patterns {
-        CHECKERED("karache"),
+        CHECKERED,
         HASH,
+        HASH4,
+        CIRCLE,
+        MOUNTAIN,
+        VERT_LEFT,
+        VERT_RIGHT,
+        BAMBOO,
+        HEMP,
+        BASKET,
+        //ETERNAL,
+        VAPOR,
+        PINE,
+        PAMPAS,
+        HAZE,
+        ARROW,
         ;
         public final RegistryObject<BannerPattern> pattern;
 
-        Patterns(String pHashname) {
-            pattern = PATTERNS.register(Lang.asId(name()), () -> new BannerPattern(pHashname));
-        }
-
         Patterns() {
-            pattern = PATTERNS.register(Lang.asId(name()), () -> new BannerPattern("kara" + name()));
+            pattern = PATTERNS.register(Lang.asId(name()), () -> new BannerPattern("kara" + name().toLowerCase(Locale.ROOT)));
         }
 
         public static void init() {

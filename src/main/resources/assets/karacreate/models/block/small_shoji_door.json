@@ -1,21 +1,23 @@
 {
-  "parent": "minecraft:block/block",
-  "textures": {
-    "texture": "karacreate:block/small_shoji_door",
-    "particle": "#texture"
-  },
-  "elements": [
-    {
-      "from": [ 0, 0, 13 ],
-      "to": [ 16, 16, 16 ],
-      "faces": {
-        "down":  { "uv": [  0, 13, 16, 16 ], "texture": "#texture", "cullface": "down" },
-        "up":    { "uv": [  0, 16, 16, 13 ], "texture": "#texture", "cullface": "up" },
-        "north": { "uv": [  0,  0, 16, 16 ], "texture": "#texture" },
-        "south": { "uv": [  0,  0, 16, 16 ], "texture": "#texture", "cullface": "south" },
-        "west":  { "uv": [ 16,  0, 13, 16 ], "texture": "#texture", "cullface": "west" },
-        "east":  { "uv": [ 13,  0, 16, 16 ], "texture": "#texture", "cullface": "east" }
-      }
-    }
-  ]
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"1": "karacreate:block/shoji_door_side",
+		"particle": "karacreate:block/shoji_door_side",
+		"texture": "karacreate:block/small_shoji_door"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 13],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+				"east": {"uv": [0, 8, 16, 11], "rotation": 270, "texture": "#1", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#texture", "cullface": "south"},
+				"west": {"uv": [0, 7, 16, 4], "rotation": 90, "texture": "#1", "cullface": "west"},
+				"up": {"uv": [0, 3, 16, 0], "texture": "#1", "cullface": "up"},
+				"down": {"uv": [0, 12, 16, 15], "texture": "#1", "cullface": "down"}
+			}
+		}
+	]
 }

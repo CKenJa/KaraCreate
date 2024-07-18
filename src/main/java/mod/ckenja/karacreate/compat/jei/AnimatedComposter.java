@@ -17,18 +17,15 @@ public class AnimatedComposter extends AnimatedKinetics {
         matrixStack.translate(xOffset, yOffset, 0);
         AllGuiTextures.JEI_SHADOW.render(graphics, -16, 13);
         matrixStack.translate(-2, 18, 0);
-        matrixStack.mulPose(Axis.XP.rotationDegrees(-15.5f));
-        matrixStack.mulPose(Axis.YP.rotationDegrees(22.5f));
         int scale = 22;
 
         blockElement(KaraCreatePartialModels.COMPOSTER_WHEEL)
-                .rotateBlock(0,0,getCurrentAngle() * 2)
-                //.rotateBlock(22.5, 22.5, 0)
+                .rotateBlock(22.5,getCurrentAngle() * 2,0)
                 .scale(scale)
                 .render(graphics);
 
         blockElement(KaraCreateBlocks.COMPOSTER.getDefaultState())
-                .rotateBlock(0, 0, 0)
+                .rotateBlock(22.5, 22.5, 0)
                 .scale(scale)
                 .render(graphics);
 

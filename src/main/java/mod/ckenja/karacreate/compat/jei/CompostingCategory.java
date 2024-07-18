@@ -1,32 +1,27 @@
 package mod.ckenja.karacreate.compat.jei;
 
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import com.simibubi.create.content.kinetics.crusher.AbstractCrushingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mod.ckenja.karacreate.content.composter.CompostingRecipe;
 import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.List;
 
-public class CompostingCategory extends CreateRecipeCategory<AbstractCrushingRecipe>{
+public class CompostingCategory extends CreateRecipeCategory<CompostingRecipe>{
 
     private final AnimatedComposter composter = new AnimatedComposter();
 
-    public CompostingCategory(Info<AbstractCrushingRecipe> info) {
+    public CompostingCategory(Info<CompostingRecipe> info) {
         super(info);
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, AbstractCrushingRecipe recipe, IFocusGroup iFocusGroup) {
-        builder
-                .addSlot(RecipeIngredientRole.INPUT, 15, 9)
-                .setBackground(getRenderedSlot(), -1, -1)
-                .addIngredients(recipe.getIngredients().get(0));
-
+    public void setRecipe(IRecipeLayoutBuilder builder, CompostingRecipe recipe, IFocusGroup iFocusGroup) {
         List<ProcessingOutput> results = recipe.getRollableResults();
         boolean single = results.size() == 1;
         int i = 0;
@@ -45,7 +40,7 @@ public class CompostingCategory extends CreateRecipeCategory<AbstractCrushingRec
     }
 
     @Override
-    public void draw(AbstractCrushingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+    public void draw(CompostingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         AllGuiTextures.JEI_ARROW.render(graphics, 85, 32);
         AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 43, 4);
         composter.draw(graphics, 48, 27);

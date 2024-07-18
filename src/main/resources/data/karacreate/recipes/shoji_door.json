@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:bamboo"
+      "item": "minecraft:oak_planks"
     },
     "P": {
-      "tag": "minecraft:paper"
+      "item": "minecraft:paper"
     }
   },
   "result": {
