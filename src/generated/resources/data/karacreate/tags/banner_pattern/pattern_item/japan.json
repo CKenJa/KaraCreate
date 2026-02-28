@@ -3,6 +3,17 @@
     "karacreate:checkered",
     "karacreate:hash",
     "karacreate:hash4",
-    "karacreate:circle"
+    "karacreate:circle",
+    "karacreate:mountain",
+    "karacreate:vert_left",
+    "karacreate:vert_right",
+    "karacreate:bamboo",
+    "karacreate:hemp",
+    "karacreate:basket",
+    "karacreate:vapor",
+    "karacreate:pine",
+    "karacreate:pampas",
+    "karacreate:haze",
+    "karacreate:arrow"
   ]
 }

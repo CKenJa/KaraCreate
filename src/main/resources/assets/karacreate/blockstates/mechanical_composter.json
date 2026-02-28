@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "minecraft:block/composter"
+        "model": "karacreate:block/mechanical_composter/block"
       }
     },
     {

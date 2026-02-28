@@ -3,11 +3,15 @@ package mod.ckenja.karacreate.compat.jei;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
+import com.simibubi.create.foundation.utility.Color;
+import com.simibubi.create.foundation.utility.Components;
+import com.simibubi.create.foundation.utility.Lang;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mod.ckenja.karacreate.content.composter.CompostingRecipe;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.List;
@@ -44,5 +48,7 @@ public class CompostingCategory extends CreateRecipeCategory<CompostingRecipe>{
         AllGuiTextures.JEI_ARROW.render(graphics, 85, 32);
         AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 43, 4);
         composter.draw(graphics, 48, 27);
+        graphics.drawString(Minecraft.getInstance().font, Components.translatable( "karacreate.jei.range_of_composting",recipe.getMinSpeed()+recipe.getMaxSpeed()), 9,
+                4, Color.WHITE.getRGB(), false);
     }
 }

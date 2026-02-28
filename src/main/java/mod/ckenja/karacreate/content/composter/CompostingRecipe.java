@@ -117,4 +117,8 @@ public class CompostingRecipe implements Recipe<RecipeWrapper> {
     public int getProcessingDuration() {
         return processingDuration;
     }
+
+    public float getMaxSpeed(){return maxSpeed;}
+
+    public float getMinSpeed(){return minSpeed;}
 }

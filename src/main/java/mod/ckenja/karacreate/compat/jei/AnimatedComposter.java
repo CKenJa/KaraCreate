@@ -19,7 +19,7 @@ public class AnimatedComposter extends AnimatedKinetics {
         matrixStack.translate(-2, 18, 0);
         int scale = 22;
 
-        blockElement(KaraCreatePartialModels.COMPOSTER_WHEEL)
+        blockElement(KaraCreatePartialModels.COMPOSTER_COG)
                 .rotateBlock(22.5,getCurrentAngle() * 2,0)
                 .scale(scale)
                 .render(graphics);

@@ -5,7 +5,8 @@ import mod.ckenja.karacreate.KaraCreate;
 
 public class KaraCreatePartialModels {
     public static final PartialModel
-            COMPOSTER_WHEEL = block("mechanical_composter/wheel");
+            COMPOSTER_COG = block("mechanical_composter/cog");
+
 
     private static PartialModel block(String path) {
         return new PartialModel(KaraCreate.asResource("block/" + path));

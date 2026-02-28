@@ -2,6 +2,7 @@ package mod.ckenja.karacreate.content.composter;
 
 import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
@@ -32,13 +33,14 @@ public class ComposterRenderer extends KineticBlockEntityRenderer<ComposterBlock
 
         Direction.Axis axis = getRotationAxisOf(be);
         Direction facing = Direction.fromAxisAndDirection(axis, Direction.AxisDirection.POSITIVE);
+
         renderRotatingBuffer(be,
-                CachedBufferer.partialFacingVertical(AllPartialModels.SHAFTLESS_LARGE_COGWHEEL, be.getBlockState(), facing),
+                CachedBufferer.partialFacingVertical(KaraCreatePartialModels.COMPOSTER_COG, be.getBlockState(), facing),
                 ms, buffer.getBuffer(RenderType.cutout()), light);
 
         float angle = getAngleForLargeCogShaft(be, axis);
         SuperByteBuffer shaft =
-                CachedBufferer.partialFacingVertical(AllPartialModels.COGWHEEL_SHAFT, be.getBlockState(), facing);
+                CachedBufferer.partialFacingVertical(AllPartialModels.SHAFT_HALF, be.getBlockState(), facing);
         kineticRotationTransform(shaft, be, axis, angle, light);
         shaft.renderInto(ms, buffer.getBuffer(RenderType.cutout()));
 

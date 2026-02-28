@@ -1,11 +1,13 @@
 package mod.ckenja.karacreate.content.composter;
 
+import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
-import com.simibubi.create.content.logistics.depot.SharedDepotBlockMethods;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.utility.Iterate;
 import mod.ckenja.karacreate.foundation.register.KaraCreateBlockEntityTypes;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -15,16 +17,20 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -32,10 +38,17 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
-import static com.simibubi.create.content.kinetics.gauge.GaugeBlock.GAUGE;
 import static net.minecraft.world.level.block.ComposterBlock.LEVEL;
 
 public class MechanicalComposterBlock extends RotatedPillarKineticBlock implements IBE<ComposterBlockEntity>, ICogWheel {
+    private static final VoxelShape[] SHAPES = Util.make(new VoxelShape[9], (p_51967_) -> {
+        for(int i = 0; i < 8; ++i) {
+            p_51967_[i] = Shapes.join(Shapes.block(), Block.box(2.0D, (double)Math.max(2, 1 + i * 2), 2.0D, 14.0D, 16.0D, 14.0D), BooleanOp.ONLY_FIRST);
+        }
+
+        p_51967_[8] = p_51967_[7];
+    });
+
     public MechanicalComposterBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(LEVEL, 0).setValue(AXIS, Direction.Axis.Y));
@@ -43,8 +56,7 @@ public class MechanicalComposterBlock extends RotatedPillarKineticBlock implemen
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        //TODO
-        return GAUGE.get(Direction.UP, true );
+        return SHAPES[state.getValue(LEVEL)];
     }
 
     @Override
@@ -135,7 +147,7 @@ public class MechanicalComposterBlock extends RotatedPillarKineticBlock implemen
 
     @Override
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return face == Direction.DOWN || face == Direction.UP;
+        return face == Direction.UP;
     }
 
     @Override
@@ -168,4 +180,7 @@ public class MechanicalComposterBlock extends RotatedPillarKineticBlock implemen
         return blockState.getValue(LEVEL);
     }
 
+    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
+        return InteractionResult.SUCCESS;
+    }
 }

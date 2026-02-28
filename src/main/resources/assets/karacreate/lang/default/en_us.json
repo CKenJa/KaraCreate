@@ -1,5 +1,6 @@
 {
   "itemGroup.karacreate": "KaraCreate",
   "item.karacreate.japanese_banner_pattern.desc": "Japan",
-  "karacreate.recipe.composting": "Composting"
+  "karacreate.recipe.composting": "Composting",
+  "karacreate.jei.range_of_composting": "%1$s~%2$s RPM"
 }

@@ -28,12 +28,13 @@ public class ComposterInstance extends SingleRotatingInstance<ComposterBlockEnti
     }
     @Override
     public void init() {
+        super.init();
         float speed = blockEntity.getSpeed();
         Direction.Axis axis = KineticBlockEntityRenderer.getRotationAxisOf(blockEntity);
         BlockPos pos = blockEntity.getBlockPos();
         float offset = BracketedKineticBlockEntityRenderer.getShaftAngleOffset(axis, pos);
         Direction facing = Direction.fromAxisAndDirection(axis, Direction.AxisDirection.POSITIVE);
-        Instancer<RotatingData> half = getRotatingMaterial().getModel(AllPartialModels.COGWHEEL_SHAFT, blockState,
+        Instancer<RotatingData> half = getRotatingMaterial().getModel(AllPartialModels.SHAFT_HALF, blockState,
                 facing, () -> this.rotateToAxis(axis));
 
         additionalShaft = setup(half.createInstance(), speed);
@@ -44,7 +45,7 @@ public class ComposterInstance extends SingleRotatingInstance<ComposterBlockEnti
     protected Instancer<RotatingData> getModel() {
         Direction.Axis axis = KineticBlockEntityRenderer.getRotationAxisOf(blockEntity);
         Direction facing = Direction.fromAxisAndDirection(axis, Direction.AxisDirection.POSITIVE);
-        return getRotatingMaterial().getModel(AllPartialModels.SHAFTLESS_LARGE_COGWHEEL, blockState, facing,
+        return getRotatingMaterial().getModel(KaraCreatePartialModels.COMPOSTER_COG, blockState, facing,
                 () -> this.rotateToAxis(axis));
     }
 
